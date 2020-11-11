@@ -7,7 +7,7 @@ yarn-error.log*
 lerna-debug.log*
 
 #config with token
-#config.json
+config.json
 
 #output folder
 dist
