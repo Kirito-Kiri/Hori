@@ -12,8 +12,8 @@ module.exports = {
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    project: 'tsconfig.json',
-    sourceType: 'module'
+    'project': 'tsconfig.json',
+    'sourceType': 'module'
   },
   plugins: ['@typescript-eslint', '@typescript-eslint/tslint', 'autofix'],
   rules: {
@@ -21,18 +21,18 @@ module.exports = {
     'autofix/no-debugger': 'error',
     '@typescript-eslint/explicit-member-accessibility': 'error',
     'arrow-body-style': ['error', 'as-needed'],
-    'arrow-parens': ['error', 'always'],
+    'arrow-parens': ['error', 'as-needed'],
     'arrow-spacing': 'warn',
-    camelcase: 'off',
+    'camelcase': 'off',
     'capitalized-comments': ['error', 'always'],
     'jsx-quotes': ['error', 'prefer-double'],
-    complexity: 'warn',
+    'complexity': 'warn',
     'computed-property-spacing': 'off',
     'constructor-super': 'error',
-    curly: ['error', 'multi-line'],
+    'curly': ['error', 'multi-line'],
     'eol-last': 'error',
     'for-direction': 'error',
-    forin: 'off',
+    'forin': 'off',
     'guard-for-in': 'off',
     'jsx-quotes': 'off',
     'lines-between-class-members': 'warn',
@@ -48,11 +48,11 @@ module.exports = {
     'no-shadow': [
       'error',
       {
-        hoist: 'never'
+        'hoist': 'never'
       }
     ],
 
-    semi: 'off',
+    'semi': 'off',
     'semi-spacing': 'off',
     'semi-style': 'off',
     'space-after-function-name': 'off',
@@ -61,8 +61,8 @@ module.exports = {
     'space-before-function-paren': [
       'error',
       {
-        anonymous: 'always',
-        named: 'never'
+        'anonymous': 'always',
+        'named': 'never'
       }
     ]
   }

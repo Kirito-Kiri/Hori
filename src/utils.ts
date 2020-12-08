@@ -1,10 +1,13 @@
-import fs from "fs"
-import path from "path"
+import fs from 'fs'
+import path from 'path'
 interface BotConfig {
-    prefix: string,
-    token: string
+  prefix: string
+  token: string
 }
+/**
+ * Export config.json properties
+ */
 export const loadConfig = () => {
-    const file = fs.readFileSync(path.join(__dirname, "..", "config.json"), {encoding: "utf8"})
-    return JSON.parse(file) as BotConfig
+  const file = fs.readFileSync(path.join(__dirname, '..', 'config.json'), { encoding: 'utf8' })
+  return JSON.parse(file) as BotConfig
 }
