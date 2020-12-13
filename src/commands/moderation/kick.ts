@@ -12,26 +12,24 @@ export default class Kick extends Command {
     })
   }
 
-  public async run(msg: Message, args: string[]) {
+  public async run(msg: Message, args: string) {
     const user = msg.mentions.users.first()
-    const reason = args.toString()
+    const reason = args
     if (user) {
       const member = msg.guild.member(user)
       if (member) {
-        await member
-          .kick(reason)
-          .then(() => {
-            msg.reply(`Kicked ${user.username} succesfully`)
-          })
-          .catch(err => {
-            msg.reply('I was unable to kick the user')
-            console.error(err)
-          })
+        try {
+          await member.kick(reason)
+          return msg.reply(`Kicked ${user.tag} succesfully`)
+        } catch (err) {
+          console.error(err)
+          return msg.reply('I was unable to kick the user')
+        }
       } else {
-        msg.reply('The user is not a member of the guild')
+        return msg.reply('The user is not a member of the guild')
       }
     } else {
-      msg.reply('Please mention a user')
+      return msg.reply('Please mention a user')
     }
   }
 }
