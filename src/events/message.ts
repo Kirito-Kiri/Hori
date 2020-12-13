@@ -5,10 +5,12 @@ const config = loadConfig()
 export = (client: Discord.Client, message: Discord.Message): void => {
   if (!message.content.startsWith(config.prefix) || message.author.bot) return
 
-  const args = message.content.slice(config.prefix.length).trim().split(/ +/g)
-  const command = args.shift().toLowerCase()
+  const arg = message.content.slice(config.prefix.length).trim().split(/ +/g)
+  const command = arg.shift().toLowerCase()
   const cmd = client.commands.get(command)
+  const args = arg.toString()
   if (!cmd) return
+
   if (!message.guild.me.hasPermission(cmd.permsNeeded)) {
     message.reply(`I lack ${cmd.permsNeeded} permissions`)
   } else if (!message.member.hasPermission(cmd.permsNeeded)) {

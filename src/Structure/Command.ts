@@ -47,5 +47,5 @@ export class Command {
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   // eslint-disable-next-line @typescript-eslint/no-unused-vars,@typescript-eslint/no-empty-function
-  public async run(msg: Message, args: string[]): Promise<any> {}
+  public async run(msg: Message, args: string): Promise<any> {}
 }
