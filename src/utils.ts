@@ -3,6 +3,7 @@ import path from 'path'
 interface BotConfig {
   prefix: string
   token: string
+  owner: string
 }
 /**
  * Export config.json properties
