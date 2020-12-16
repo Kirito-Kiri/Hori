@@ -1,8 +1,10 @@
 import Discord from 'discord.js'
 import { loadConfig } from '../utils'
+import { autoreply } from '../autoreply/triggers'
 const config = loadConfig()
 
 export = (client: Discord.Client, message: Discord.Message) => {
+  autoreply(message)
   if (!message.content.startsWith(config.prefix) || message.author.bot) return
 
   const arg = message.content.slice(config.prefix.length).trim().split(/ +/g)
