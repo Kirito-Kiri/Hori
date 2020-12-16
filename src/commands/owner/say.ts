@@ -8,8 +8,7 @@ export default class say extends Command {
       description: 'Repeats what you said and deletes the command',
       argumentRequired: true,
       isGuildOnly: true,
-      isOwnerOnly: true,
-      permsNeeded: ['MANAGE_MESSAGES']
+      isOwnerOnly: true
     })
   }
 
