@@ -1,6 +1,6 @@
 import { BanOptions } from 'discord.js'
 import { Message } from 'discord.js'
-import { Command } from 'Structure/Command'
+import { Command } from '../../Structure/Command'
 
 export default class Ban extends Command {
   public constructor() {
@@ -22,6 +22,10 @@ export default class Ban extends Command {
         const days: BanOptions['days'] = Number(args.charAt(0)) || 0
         const reason: BanOptions['reason'] = args.slice(1)
         const range = 1 || 2 || 3 || 4 || 5 || 6 || 7
+
+        if (!reason) {
+          return msg.reply(`Please provide a reason!`)
+        }
 
         if (days === range) {
           if (member) {
