@@ -21,13 +21,13 @@ export default class Ban extends Command {
       if (!isNaN(Number(args.charAt(0)))) {
         const days: BanOptions['days'] = Number(args.charAt(0)) || 0
         const reason: BanOptions['reason'] = args.slice(1)
-        const range = 1 || 2 || 3 || 4 || 5 || 6 || 7
+        const range: number[] = [1, 2, 3, 4, 5, 6, 7]
 
         if (!reason) {
           return msg.reply(`Please provide a reason!`)
         }
 
-        if (days === range) {
+        if (range.includes(days)) {
           if (member) {
             try {
               await member.ban({ days, reason })
