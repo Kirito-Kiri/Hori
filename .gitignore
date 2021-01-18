@@ -14,3 +14,6 @@ dist
 
 # Dependency directories
 node_modules
+
+#VSCode Workspace
+workspace.code-workspace 
