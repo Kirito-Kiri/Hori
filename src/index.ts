@@ -4,6 +4,7 @@ import { findFilesByType } from './commandHandler'
 import { loadConfig } from './utils'
 import { loadEvents } from './eventHandler'
 import { Command } from './Structure/Command'
+
 const config = loadConfig()
 
 const client = new Discord.Client()
