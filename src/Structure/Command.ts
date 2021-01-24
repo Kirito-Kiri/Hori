@@ -33,7 +33,7 @@ export class Command {
     this.description = data.description
     this.argumentRequired = data.argumentRequired === true
     this.isGuildOnly = data.isGuildOnly !== false
-    this.isOwnerOnly = data.isOwnerOnly === true
+    this.isOwnerOnly = data.isOwnerOnly === false
     this.cooldown = data.cooldown || 2
     this.permsNeeded = data.permsNeeded || ['SEND_MESSAGES']
 
@@ -45,7 +45,6 @@ export class Command {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   // eslint-disable-next-line @typescript-eslint/no-unused-vars,@typescript-eslint/no-empty-function
   public async run(msg: Message, args: string): Promise<any> {}
 }
