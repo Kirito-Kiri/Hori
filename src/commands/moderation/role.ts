@@ -1,13 +1,14 @@
 import { Message } from 'discord.js'
 import { Command } from '../../Structure/Command'
 
-export default class Kick extends Command {
+export default class Role extends Command {
   public constructor() {
     super({
       name: 'role',
       description: 'Assigns a role to the mentioned user',
       argumentRequired: true,
       isGuildOnly: true,
+      isOwnerOnly: false,
       permsNeeded: ['SEND_MESSAGES', 'MANAGE_ROLES']
     })
   }
@@ -20,7 +21,7 @@ export default class Kick extends Command {
       if (member) {
         try {
           await member.roles.add(contributor)
-          return msg.reply(`Added ${contributor} to ${user.tag}`)
+          return msg.reply(`Added ${contributor} to ${user.username}`)
         } catch (err) {
           console.error(err)
           return msg.reply(`Unable to assign the role`)
