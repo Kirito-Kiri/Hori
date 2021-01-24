@@ -1,9 +1,9 @@
-import Discord from 'discord.js'
+import { Message, Client, MessageEmbed } from 'discord.js'
 import { loadConfig } from '../utils'
 import { autoreply } from '../autoreply/triggers'
 const config = loadConfig()
 
-export = (client: Discord.Client, message: Discord.Message) => {
+export = (client: Client, message: Message): Promise<any> => {
   autoreply(message)
   if (!message.content.startsWith(config.prefix) || message.author.bot) return
 
@@ -13,10 +13,13 @@ export = (client: Discord.Client, message: Discord.Message) => {
   const args = arg.join(' ')
   if (!cmd) return
 
+  const embed = new MessageEmbed()
   if (!message.guild.me.hasPermission(cmd.permsNeeded)) {
-    return message.reply(`I lack ${cmd.permsNeeded} permissions`)
+    embed.setAuthor(message.author).setDescription(`I lack \`${cmd.permsNeeded}\` permissions`)
+    return message.reply(embed)
   } else if (!message.member.hasPermission(cmd.permsNeeded)) {
-    return message.reply(`You do not have ${cmd.permsNeeded} permissions`)
+    embed.setAuthor(message.author).setDescription(`You do not have \`${cmd.permsNeeded}\` permissions`)
+    return message.reply(embed)
   }
 
   if (!cmd.isOwnerOnly) {

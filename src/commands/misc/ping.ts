@@ -1,4 +1,5 @@
 import { Message } from 'discord.js'
+import { MessageEmbed } from 'discord.js'
 import { Command } from '../../Structure/Command'
 
 export default class Ping extends Command {
@@ -6,12 +7,22 @@ export default class Ping extends Command {
     super({
       name: 'ping',
       description: 'Ping!',
-      argumentRequired: false
+      argumentRequired: false,
+      isOwnerOnly: false
     })
   }
 
-  // eslint-disable-next-line @typescript-eslint/require-await
-  public async run(msg: Message): Promise<void> {
-    msg.channel.send(`🏓Latency is ${Date.now() - msg.createdTimestamp}ms`).catch(console.error)
+  public async run(msg: Message) {
+    const embed = new MessageEmbed()
+    try {
+      embed
+        .setAuthor(msg.author)
+        .setColor('cyan')
+        .setTitle('Ping Result')
+        .setDescription(`🏓Latency is ${Date.now() - msg.createdTimestamp}ms`)
+      return await msg.channel.send(embed)
+    } catch (err) {
+      console.error(err)
+    }
   }
 }

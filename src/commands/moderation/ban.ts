@@ -1,5 +1,5 @@
 import { BanOptions } from 'discord.js'
-import { Message } from 'discord.js'
+import { Message, MessageEmbed } from 'discord.js'
 import { Command } from '../../Structure/Command'
 
 export default class Ban extends Command {
@@ -9,6 +9,7 @@ export default class Ban extends Command {
       description: 'Bans a user from the server',
       argumentRequired: true,
       isGuildOnly: true,
+      isOwnerOnly: false,
       permsNeeded: ['BAN_MEMBERS']
     })
   }
@@ -17,6 +18,7 @@ export default class Ban extends Command {
     const user = msg.mentions.users.first()
     if (user) {
       const member = msg.guild.member(user)
+      const embed = new MessageEmbed()
 
       if (!isNaN(Number(args.charAt(0)))) {
         const days: BanOptions['days'] = Number(args.charAt(0)) || 0
@@ -31,7 +33,10 @@ export default class Ban extends Command {
           if (member) {
             try {
               await member.ban({ days, reason })
-              return msg.reply(`Banned ${user.tag} succesfully and deleted ${days} messages by ${user.tag}`)
+              embed.setAuthor(msg.author).setTitle('User Banned')
+                .setDescription(`Banned @${user.tag} succesfully. Their messages for ${days} days were deleted.
+                Reason: ${reason}`)
+              return msg.reply(embed)
             } catch (err) {
               console.error(err)
               return msg.reply('I was unable to ban the user')
@@ -48,7 +53,10 @@ export default class Ban extends Command {
 
           try {
             await member.ban({ reason })
-            return msg.reply(`Banned ${user.tag} succesfully`)
+            embed.setAuthor(msg.author).setColor('red').setTitle('User banned!')
+              .setDescription(`Banned @${user.tag} succesfully.
+              Reason: ${reason}`)
+            return msg.reply(embed)
           } catch (err) {
             console.error(err)
             return msg.reply('I was unable to ban the user')

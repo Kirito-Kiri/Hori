@@ -1,4 +1,4 @@
-import { Message } from 'discord.js'
+import { Message, MessageEmbed } from 'discord.js'
 import { Command } from '../../Structure/Command'
 
 export default class Kick extends Command {
@@ -8,6 +8,7 @@ export default class Kick extends Command {
       description: 'Kicks a member from the server',
       argumentRequired: true,
       isGuildOnly: true,
+      isOwnerOnly: false,
       permsNeeded: ['SEND_MESSAGES', 'KICK_MEMBERS']
     })
   }
@@ -17,10 +18,12 @@ export default class Kick extends Command {
     const reason = args
     if (user) {
       const member = msg.guild.member(user)
+      const embed = new MessageEmbed()
       if (member) {
         try {
           await member.kick(reason)
-          return msg.reply(`Kicked ${user.tag} succesfully`)
+          embed.setAuthor(msg.author).setTitle('User kicked!').setDescription(`Kicked @${user.tag} succesfully`)
+          return msg.reply(embed)
         } catch (err) {
           console.error(err)
           return msg.reply('I was unable to kick the user')
