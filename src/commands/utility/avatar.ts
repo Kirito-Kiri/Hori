@@ -12,20 +12,13 @@ export default class avatar extends Command {
   }
 
   public async run(msg: Message) {
-    const user = msg.mentions.users.first()
+    const user = msg.mentions.users.first() || msg.author
     const embed = new MessageEmbed()
-    if (user) {
-      embed
-        .setAuthor(msg.author)
-        .setImage(user.displayAvatarURL({ dynamic: true }))
-        .setTitle(`${user} avatar`)
-      return await msg.channel.send(embed)
-    } else {
-      embed
-        .setAuthor(msg.author)
-        .setImage(msg.author.displayAvatarURL({ dynamic: true }))
-        .setTitle(`${msg.author} avatar`)
-      return await msg.channel.send(embed)
-    }
+    embed
+      .setImage(user.avatarURL({ dynamic: true, size: 1024 }))
+      .setAuthor(msg.guild.member(user).displayName, user.avatarURL({ dynamic: true }))
+      .setTimestamp(msg.createdTimestamp)
+      .setColor('AQUA')
+    return await msg.channel.send(embed)
   }
 }
