@@ -1,5 +1,4 @@
-import { Message } from 'discord.js'
-import { MessageEmbed } from 'discord.js'
+import { Message, MessageEmbed } from 'discord.js'
 import { Command } from '../../Structure/Command'
 
 export default class Ping extends Command {
