@@ -21,7 +21,7 @@ export default class Role extends Command {
       if (member) {
         try {
           await member.roles.add(contributor)
-          return msg.reply(`Added ${contributor} to ${user.username}`)
+          return msg.reply(`Added ${contributor.id} to <!@${user.id}>`)
         } catch (err) {
           console.error(err)
           return msg.reply(`Unable to assign the role`)

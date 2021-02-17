@@ -15,14 +15,19 @@ export default class Kick extends Command {
 
   public async run(msg: Message, args: string) {
     const user = msg.mentions.users.first()
-    const reason = args
+    const reason = args || 'No reason provided'
     if (user) {
       const member = msg.guild.member(user)
       const embed = new MessageEmbed()
       if (member) {
         try {
           await member.kick(reason)
-          embed.setAuthor(msg.author).setTitle('User kicked!').setDescription(`Kicked @${user.tag} succesfully`)
+          embed
+            .setAuthor(msg.guild.member(msg.author).displayName)
+            .setColor('ORANGE')
+            .setTitle('User kicked!')
+            .setDescription(`Kicked <!@${user.id}> succesfully`)
+            .setTimestamp(msg.createdTimestamp)
           return msg.reply(embed)
         } catch (err) {
           console.error(err)

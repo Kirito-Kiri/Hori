@@ -15,10 +15,16 @@ export = (client: Client, message: Message): Promise<any> => {
 
   const embed = new MessageEmbed()
   if (!message.guild.me.hasPermission(cmd.permsNeeded)) {
-    embed.setAuthor(message.author).setDescription(`I lack \`${cmd.permsNeeded}\` permissions`)
+    embed
+      .setAuthor(message.guild.member(message.author).displayName, message.author.avatarURL({ dynamic: true }))
+      .setDescription(`I lack \`${cmd.permsNeeded}\` permissions`)
+      .setColor('RED')
     return message.reply(embed)
   } else if (!message.member.hasPermission(cmd.permsNeeded)) {
-    embed.setAuthor(message.author).setDescription(`You do not have \`${cmd.permsNeeded}\` permissions`)
+    embed
+      .setAuthor(message.guild.member(message.author).displayName, message.author.avatarURL({ dynamic: true }))
+      .setDescription(`You do not have \`${cmd.permsNeeded}\` permissions`)
+      .setColor('RED')
     return message.reply(embed)
   }
 
