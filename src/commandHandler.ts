@@ -7,7 +7,7 @@ import path from 'path'
  * @param extention Extension to find
  */
 export const findFilesByType = (dir: string, extention: string) => {
-  let results: any[] = []
+  let results: string[] = []
 
   // Read specified folder and for each folder/ file inside of it
   fs.readdirSync(dir).forEach(innerDir => {
